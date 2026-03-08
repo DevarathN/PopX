@@ -20,7 +20,7 @@ export default function Signup() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [registrationsuccessful, setRegistrationsuccessful] = useState(false);
-  const [registrationunsuccessful,setRegistrationunsuccessful] = useState(false)
+  const [registrationunsuccessful,setRegistrationunsuccessful] = useState(false);
   const navigate = useNavigate();
    const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -38,7 +38,7 @@ export default function Signup() {
 
     }
     catch(err){
-      setRegistrationunsuccessful(true)
+      setRegistrationunsuccessful(true);
     }
     
   };
@@ -280,7 +280,7 @@ export default function Signup() {
         </Alert>
       </Snackbar>
       <Snackbar
-        open={failopen}
+        open={registrationunsuccessful}
         autoHideDuration={3000}
         onClose={handleClose}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
@@ -301,6 +301,7 @@ export default function Signup() {
   </>
   );
 }
+
 
 
 
