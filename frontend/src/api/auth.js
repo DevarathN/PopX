@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:5000/api/auth";
+const API = import.meta.env.VITE_API_URL;
 
 export const signup = async (
   name,
@@ -7,7 +7,7 @@ export const signup = async (
   password,
   companyName,
 ) => {
-  const res = await fetch(`${BASE_URL}/signup`, {
+  const res = await fetch(`${API}/api/auth/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, phoneNumber, email, password, companyName }),
@@ -16,7 +16,7 @@ export const signup = async (
 };
 
 export const login = async (email, password) => {
-  const res = await fetch(`${BASE_URL}/login`, {
+  const res = await fetch(`${API}/api/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
@@ -26,7 +26,7 @@ export const login = async (email, password) => {
 export const getProfile = async () => {
   const token = localStorage.getItem("token");
 
-  const res = await fetch("http://localhost:5000/api/auth/me", {
+  const res = await fetch(`${API}/api/auth/me`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
