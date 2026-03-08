@@ -8,6 +8,8 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { useNavigate } from "react-router-dom";
 import "../css/signup.css";
@@ -17,11 +19,21 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [companyName, setCompanyName] = useState("");
+  const [registrationsuccessful, setRegistrationsuccessful] = useState(false);
+
   const navigate = useNavigate();
+   const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setRegistrationsuccessful(false);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await signup(name, phoneNumber, email, password, companyName);
-    alert(res.message || "Signup successful");
+    setRegistrationsuccessful(true);
+    
   };
   const handlePhoneNumberChange = (e) => {
     let value = e.target.value.replace(/\D/g, "");
@@ -238,6 +250,26 @@ export default function Signup() {
           Create Account
         </Button>
       </Box>
+      <Snackbar
+        open={registrationsuccessful}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleClose}
+          severity="success"
+          variant="filled"
+          sx={{
+            width: "100%",
+            backgroundColor: "#6C25FF",
+            border: "1px solid",
+          }}
+        >
+          Registration successful 
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
+
