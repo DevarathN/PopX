@@ -20,7 +20,7 @@ export default function Signup() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [registrationsuccessful, setRegistrationsuccessful] = useState(false);
-
+  const [registrationunsuccessful,setRegistrationunsuccessful] = useState(false)
   const navigate = useNavigate();
    const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -28,11 +28,18 @@ export default function Signup() {
     }
 
     setRegistrationsuccessful(false);
+     setRegistrationunsuccessful(false);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await signup(name, phoneNumber, email, password, companyName);
+    try{
+          const res = await signup(name, phoneNumber, email, password, companyName);
     setRegistrationsuccessful(true);
+
+    }
+    catch(err){
+      setRegistrationunsuccessful(true)
+    }
     
   };
   const handlePhoneNumberChange = (e) => {
@@ -272,8 +279,28 @@ export default function Signup() {
           Registration successful 
         </Alert>
       </Snackbar>
+      <Snackbar
+        open={failopen}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleClose}
+          severity="error"
+          variant="filled"
+          sx={{
+            width: "100%",
+
+            fontWeight: "600",
+          }}
+        >
+          Registration failed. Please try again with different details.          
+        </Alert>
+      </Snackbar>
   </>
   );
 }
+
 
 
