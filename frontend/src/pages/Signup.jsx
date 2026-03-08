@@ -41,6 +41,7 @@ export default function Signup() {
     setPhoneNumber(value);
   };
   return (
+    <>
     <div className="signup-container">
       <a
         style={{
@@ -250,6 +251,8 @@ export default function Signup() {
           Create Account
         </Button>
       </Box>
+      
+    </div>
       <Snackbar
         open={registrationsuccessful}
         autoHideDuration={3000}
@@ -269,7 +272,8 @@ export default function Signup() {
           Registration successful 
         </Alert>
       </Snackbar>
-    </div>
+  </>
   );
 }
+
 
