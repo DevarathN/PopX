@@ -29,7 +29,7 @@ export default function Login() {
     if (res.token) {
       localStorage.setItem("token", res.token);
       setSuccessOpen(true);
-      navigate("/me");
+      setTimeout(()=>{navigate("/me");},2000)
     } else {
       setFailOpen(true);
     }
@@ -172,5 +172,6 @@ export default function Login() {
     </>
   );
 }
+
 
 
